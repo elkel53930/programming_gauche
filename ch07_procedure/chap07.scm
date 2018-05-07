@@ -38,4 +38,7 @@
   (lambda (proc lis) (walker proc (filter number? lis))))
 
 ; (filter number? lis)で入れ子になったリストがはじかれる
-; filterする場所を変えないといけないのか？
+; number?だけでなくて、list?も条件に入れてみてはどうか？(lambda (lis) (or (number? lis) (list? lis)))
+
+(define (numbers-only-for-tree walker)
+  (lambda (proc lis) (walker proc (filter (lambda (lis) (or (number? lis) (list? lis))) lis))))
