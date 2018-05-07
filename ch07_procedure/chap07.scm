@@ -38,4 +38,4 @@
   (lambda (proc lis) (walker proc (filter number? lis))))
 
 ; (filter number? lis)で入れ子になったリストがはじかれる
-; filter書ける場所を変えないといけないのか？
+; filterする場所を変えないといけないのか？
