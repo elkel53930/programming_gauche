@@ -42,3 +42,29 @@
 
 (define (numbers-only-for-tree walker)
   (lambda (proc lis) (walker proc (filter (lambda (lis) (or (number? lis) (list? lis))) lis))))
+
+; 可変長引数
+(define (func a b . c) (print "a=" a ", b=" b ", c=" c))
+
+(define (append/log . args)
+  (print "args=" args)
+  (apply append args))
+
+(define (make-logger func)
+  (lambda args
+    (print "args=" args)
+    (apply func args)))
+
+(define append/log_2 (make-logger append))
+(define cons/log (make-logger cons))
+(define fold/log (make-logger fold))
+
+(define (append2 a b)
+  (if (pair? a)
+      (cons (car a) (append2 (cdr a) b))
+      b))
+
+(define (append . args)
+  (cond [(null? args) '()]
+        [(null? (cdr args)) (car args)]
+        [else (append2 (car args) (apply append (cdr args)))]))
