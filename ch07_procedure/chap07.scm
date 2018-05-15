@@ -124,3 +124,25 @@
     (print "Other info: " other-args)))
 
 (person :abc 'ABC :born-in "Hawaii")
+
+(print (find (cut < <> 3) '(6 5 4 3 2 1)))
+
+(define oneXtwo (cut <> 1 2))
+
+(let-values
+  (((min-val max-val) (min&max 3 1 2)))
+  (format #t "max: ~s\nmin: ~s\n" max-val min-val))
+
+(print "let-values")
+(let ((a 3)
+      (b 4))
+  (let-values (((a b) (min&max 0 100))
+               ((x y) (min&max a b)))
+    (format #t "x: ~s\ny: ~s\n" x y)))
+
+(print "let*-values")
+(let ((a 3)
+      (b 4))
+  (let*-values (((a b) (min&max 0 100))
+               ((x y) (min&max a b)))
+    (format #t "x: ~s\ny: ~s\n" x y)))
